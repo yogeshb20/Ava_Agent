@@ -15,11 +15,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # UAT Server Database connection details
-name = UATDB_dict["name"] 
-username = UATDB_dict["username"]   # Replace with your actual username
-password =  UATDB_dict["password"] # UATDB_dict["password"] Replace with your actual password
-host = UATDB_dict["host"]  # Corrected host format
-port = UATDB_dict["port"]  # Default MySQL port
+name = LocalDB_dict["name"] 
+username = LocalDB_dict["username"]   # Replace with your actual username
+password =  LocalDB_dict["password"] # UATDB_dict["password"] Replace with your actual password
+host = LocalDB_dict["host"]  # Corrected host format
+port = LocalDB_dict["port"]  # Default MySQL port
 
 
 # Database connection
