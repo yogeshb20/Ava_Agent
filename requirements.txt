@@ -1,0 +1,15 @@
+langchain
+langgraph
+langchain-core
+langgraph_prebuilt
+langchain_experimental
+langchain-openai
+openai 
+tqdm
+pandas==2.2.1
+numpy==1.26.4
+pydantic
+fastapi
+uvicorn
+sqlalchemy
+pymysql
