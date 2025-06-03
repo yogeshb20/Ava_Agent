@@ -379,7 +379,7 @@ async def end_chat(request: ChatRequest):
 
         # Email routing logic
         client_id = customer.get("CLIENT_ID")
-        email_info = client_email_map_main.get(client_id, {
+        email_info = client_email_map.get(client_id, {
             "TO": email_config["TO"],
             "CC": email_config["CC"]
         })
