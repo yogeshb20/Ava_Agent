@@ -281,36 +281,68 @@ def get_feedback_by_customer_and_developer(customer_name: str, developer_names: 
 
 
 
-def customer_information(client_id: int = None, client_name: str = None):
-    """Fetches customer profile based on the Client_id or Client_Name."""
+# def customer_information(client_id: int = None, client_name: str = None):
+#     """Fetches customer profile based on the Client_id or Client_Name."""
     
-    # print(f"Looking up customer: {client_name and client_id}")  # Debug print
-    try:
-        conn = get_db_connection(name, username, password, host, port)
-        if not conn:
-            raise Exception("Database connection is not established.")
+#     # print(f"Looking up customer: {client_name and client_id}")  # Debug print
+#     try:
+#         conn = get_db_connection(name, username, password, host, port)
+#         if not conn:
+#             raise Exception("Database connection is not established.")
 
-        conditions = []
-        params = {}
+#         conditions = []
+#         params = {}
 
-        if client_id:
-            conditions.append("CLIENT_ID = :client_id")
-            params["client_id"] = client_id
+#         if client_id:
+#             conditions.append("CLIENT_ID = :client_id")
+#             params["client_id"] = client_id
         
-        if client_name:
-            conditions.append("CLIENT_NAME LIKE :name_like")
-            params["name_like"] = f"%{client_name}%"
+#         if client_name:
+#             conditions.append("CLIENT_NAME LIKE :name_like")
+#             params["name_like"] = f"%{client_name}%"
 
-        if not conditions:
+#         if not conditions:
+#             raise ValueError("At least one of client_id or client_name must be provided.")
+
+#         query_str = f"SELECT * FROM tblclient_user WHERE {' AND '.join(conditions)}"
+#         query = text(query_str)
+#         result = conn.execute(query, params)
+
+#         records = result.mappings().all()
+#         # print("Record of Customer info:\n", records)
+#         return records
+
+#     except Exception as e:
+#         print(f"Error fetching customer info: {e}")
+#         return []
+
+
+def customer_information(client_id: str = None, client_name: str = None):
+    """Fetches customer profile based on the client_id or client_name from a dictionary."""
+
+    # Sample in-memory customer data
+    customers = [
+        {
+            "CLIENT_ID": "001",
+            "CLIENT_NAME": "Mark Johnson",
+            "PROJECT_ASSIGNED": ["Ajay", "Rajesh"]
+        },
+        # You can add more customers here
+    ]
+
+    try:
+        if not client_id and not client_name:
             raise ValueError("At least one of client_id or client_name must be provided.")
 
-        query_str = f"SELECT * FROM tblclient_user WHERE {' AND '.join(conditions)}"
-        query = text(query_str)
-        result = conn.execute(query, params)
+        results = []
 
-        records = result.mappings().all()
-        # print("Record of Customer info:\n", records)
-        return records
+        for customer in customers:
+            if client_id and customer["CLIENT_ID"] == client_id:
+                results.append(customer)
+            elif client_name and client_name.lower() in customer["CLIENT_NAME"].lower():
+                results.append(customer)
+
+        return results
 
     except Exception as e:
         print(f"Error fetching customer info: {e}")
